@@ -1,0 +1,13 @@
+.spect {
+  background-color: #fff;
+}
+.spect:nth-child(4n + 1),
+.spect:nth-child(4n + 2) 
+.spect:nth-child(8n + 2),
+.spect:nth-child(8n + 6),
+.spect:nth-child(8n + 1),
+.spect:nth-child(8n + 5),
+.spect:nth-child(4n + 6),
+.spect:nth-child(12n + 2) {
+  background-color: rgba(229, 231, 235);
+}

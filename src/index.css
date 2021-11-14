@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+i {
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background: currentColor;
+  color: #000;
+  display: block;
+}
+
+[class*='icon-car'] {
+  mask-image: url('./assets/icons/sedan.svg');
+}
+
+[class*='icon-truck'] {
+  mask-image: url('./assets/icons/truck.svg');
+}
+
+[class*='icon-moto'] {
+  mask-image: url('./assets/icons/moto.svg');
+}
+
+[class*='icon-quad-moto'] {
+  mask-image: url('./assets/icons/quad.svg');
+}
+
+[class*='icon-buggy'] {
+  mask-image: url('./assets/icons/buggy.svg');
+}
+
+[class*='icon-go-kart'] {
+  mask-image: url('./assets/icons/go-kart.svg');
+}
+
+[class*='icon-jet-ski'] {
+  mask-image: url('./assets/icons/jet-ski.svg');
+}
+
+[class*='icon-snow'] {
+  mask-image: url('./assets/icons/snow.svg');
+}
+
+[class*='icon-close'] {
+  mask-image: url('./assets/icons/x-circle.svg');
+}
