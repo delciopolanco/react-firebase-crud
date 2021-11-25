@@ -10,7 +10,7 @@ const brandsMapper = (brands) => {
   return brands;
 }
 
-const CarsFilters = memo(({ carTabs, car }) => {
+const CarsFilters = memo(({ carTabs, car, onSearch }) => {
   const brands = useApi('BRANDS', brandsMapper, []);
   const yearOptions = useApi('YEARS', yearsMapper, []);
   const [brandOptions, setBrandsOptions] = useState([]);
@@ -84,7 +84,7 @@ const CarsFilters = memo(({ carTabs, car }) => {
         <Select name={'modelo'} options={modelsOptions} disabled={isSelectDisabled(modelsOptions)} selected={model} change={modelHandler} />
         {motorsOptions != null ? <Select name={'motor'} options={motorsOptions} disabled={isSelectDisabled(motorsOptions)} selected={motor} change={motorHandler} /> : null}
         <div className="mr-1 my-3 max-width " style={{ minWidth: '16%' }}>
-          <Button value="Buscar" disabled={isLoading}></Button>
+          <Button value="Buscar" onClickButton={onSearch} disabled={isLoading}></Button>
         </div>
       </div>
     </div>

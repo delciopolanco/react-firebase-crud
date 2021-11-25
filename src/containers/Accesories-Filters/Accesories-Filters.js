@@ -1,7 +1,9 @@
 import { Button, SelectSearch } from '../../components';
 
 
-const AccesoriesFilters = () => {
+
+
+const AccesoriesFilters = ({ onSearch }) => {
   const style = { color: '#244983', maxWidth: '35%', height: '40px' };
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
@@ -20,7 +22,7 @@ const AccesoriesFilters = () => {
       </div>
 
       <div className="align-middle w-full p-0 m-4 text-base uppercase font-bold mx-1" style={{ ...style, textAlign: 'left', maxWidth: '15%' }}>
-        <Button value="Buscar"></Button>
+        <Button value="Buscar" onClickButton={onSearch}></Button>
       </div>
     </div>
   )

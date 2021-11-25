@@ -2,6 +2,7 @@ import { CarsFilters, AccesoriesFilters, ProductList } from '../containers';
 import { Tabs } from '../components';
 import { CarTabs, CategoriesTabs, CONFIG } from '../enums';
 import { useState } from 'react';
+import { API } from '../services';
 
 
 const Filter = () => {
@@ -9,6 +10,13 @@ const Filter = () => {
   const carTabs = CarTabs;
   const [category, setCategory] = useState(CONFIG.DEFAULT_CATEGORY_TAB);
   const [car] = useState(CONFIG.DEFAULT_CAR_TAB);
+  const [items, setItems] = useState([]);
+
+  const getProducts = async () => {
+    const products = await API.PRODUCTS.get();
+    setItems(products.docs.map((doc) => ({ ...doc.data() })));
+  }
+
 
   const onChangeHandlerCategories = (name) => {
     setCategory(name);
@@ -16,11 +24,11 @@ const Filter = () => {
   }
 
   const FiltersContainer = () => {
-    return category === CONFIG.DEFAULT_CATEGORY_TAB ? <CarsFilters carTabs={carTabs} car={car} /> : <AccesoriesFilters />;
+    return category === CONFIG.DEFAULT_CATEGORY_TAB ? <CarsFilters carTabs={carTabs} car={car} onSearch={(e) => getProducts()} /> : <AccesoriesFilters onSearch={(e) => console.log('hey')}/>;
   }
 
   const ProductsContainer = () => {
-    return <ProductList name={'Baterias'} />;
+    return <ProductList name={'Baterias'} items={items} />;
   }
 
   const TabsContainer = () => {
