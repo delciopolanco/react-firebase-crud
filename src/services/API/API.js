@@ -1,5 +1,6 @@
 import { FirestoreWrapper } from '../Firestore-Wrapper/Firestore-Wrapper';
-
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const functions = {
   get() {
@@ -28,7 +29,33 @@ const functions = {
 const API = {
   PRODUCTS: {
     db: 'products',
-    ...functions
+    ...functions,
+    async getProductsBasedOnCriteria({ category, years, brands, models, motors }) {
+      if (!category) return;
+
+      const dataCollectionRef = collection(db, this.db);
+      let criteria = query(dataCollectionRef, where("category", "==", category));
+      
+      if (Array.isArray(years)) {
+        criteria = query(dataCollectionRef, where("filteringOptions.years", "array-contains-any", years));
+      }
+
+      if (Array.isArray(brands)) {
+        criteria = query(dataCollectionRef, where("filteringOptions.brands", "array-contains-any", brands));
+      }
+
+
+      if (Array.isArray(models)) {
+        criteria = query(dataCollectionRef, where("filteringOptions.models", "array-contains-any", models));
+      }
+
+
+      if (Array.isArray(motors)) {
+        criteria = query(dataCollectionRef, where("filteringOptions.motors", "array-contains-any", motors));
+      }
+
+      return await getDocs(criteria);
+    }
   },
   YEARS: {
     db: 'years',

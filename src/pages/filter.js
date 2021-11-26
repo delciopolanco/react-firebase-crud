@@ -12,8 +12,15 @@ const Filter = () => {
   const [car] = useState(CONFIG.DEFAULT_CAR_TAB);
   const [items, setItems] = useState([]);
 
-  const getProducts = async () => {
-    const products = await API.PRODUCTS.get();
+  const getProducts = async ({ year, brand, model, motor }) => {
+    const products = await API.PRODUCTS.getProductsBasedOnCriteria({
+      category,
+      years: year ? [year] : null,
+      brands: brand ? [brand] : null,
+      models: model ? [model] : null,
+      motor: motor ? [motor] : null
+    });
+
     setItems(products.docs.map((doc) => ({ ...doc.data() })));
   }
 
@@ -24,7 +31,7 @@ const Filter = () => {
   }
 
   const FiltersContainer = () => {
-    return category === CONFIG.DEFAULT_CATEGORY_TAB ? <CarsFilters carTabs={carTabs} car={car} onSearch={(e) => getProducts()} /> : <AccesoriesFilters onSearch={(e) => console.log('hey')}/>;
+    return category === CONFIG.DEFAULT_CATEGORY_TAB ? <CarsFilters carTabs={carTabs} car={car} onSearch={getProducts} /> : <AccesoriesFilters onSearch={(e) => console.log('hey')} />;
   }
 
   const ProductsContainer = () => {
@@ -32,7 +39,7 @@ const Filter = () => {
   }
 
   const TabsContainer = () => {
-   return  (
+    return (
       <div className="title m-0 flex flex-wrap justify-center p-0 w-auto list-none">
         <h2 className="block text-center text-lg font-medium" style={{ flex: '1 0 100%' }}>Buscador de productos</h2>
         <Tabs tabs={categoriesTabs} selected={category} style={{ height: '40px' }} onChange={(name) => onChangeHandlerCategories(name)} />
